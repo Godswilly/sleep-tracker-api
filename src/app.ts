@@ -1,37 +1,16 @@
-import express, {
-	Application,
-	Request,
-	Response,
-	NextFunction,
-	ErrorRequestHandler,
-} from 'express';
-import { config } from 'dotenv';
-import { Server } from 'http';
-import createHttpError from 'http-errors';
+import 'reflect-metadata';
+import express, { Application, Request, Response, NextFunction } from 'express';
 
-config();
+import userRoutes from './routes/user.route';
 
-const app: Application = express();
-const PORT: Number = Number(process.env.PORT) || 5000;
+export const app: Application = express();
 
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-	res.send('Hello World');
+app.use(express.json());
+
+app.use('/users', userRoutes);
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+	res.status(500).json({ message: err.message });
 });
 
-app.use((req: Request, res: Response, next: NextFunction) => {
-	next(new createHttpError.NotFound());
-});
-
-const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
-	res.status(err.status || 500);
-	res.send({
-		status: err.status || 500,
-		message: err.message,
-	});
-};
-
-app.use(errorHandler);
-
-const server: Server = app.listen(PORT, () => {
-	console.log(`Server listening on port ${PORT}`);
-});
+module.exports = app;
