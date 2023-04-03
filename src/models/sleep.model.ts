@@ -8,18 +8,18 @@ import {
 	DeletedAt,
 } from 'sequelize-typescript';
 
-interface IUserAttributes {
+interface ISleepAttributes {
 	id: string;
-	username: string;
-	email: string;
-	password: string;
+	startTime: Date;
+	endTime: Date;
+	date: Date;
 	createdAt: Date;
 	updatedAt: Date;
 	deletedAt: Date | null;
 }
 
-@Table({ tableName: 'users' })
-class User extends Model<IUserAttributes> implements IUserAttributes {
+@Table({ tableName: 'sleeps' })
+class Sleep extends Model<ISleepAttributes> implements ISleepAttributes {
 	@Column({
 		type: DataType.UUID,
 		defaultValue: DataType.UUIDV4,
@@ -29,23 +29,24 @@ class User extends Model<IUserAttributes> implements IUserAttributes {
 	id!: string;
 
 	@Column({
-		type: DataType.STRING,
+		field: 'start_time',
+		type: DataType.DATE,
 		allowNull: false,
 	})
-	username!: string;
+	startTime!: Date;
 
 	@Column({
-		type: DataType.STRING(255),
+		field: 'end_time',
+		type: DataType.DATE,
 		allowNull: false,
-		unique: true,
 	})
-	email!: string;
+	endTime!: Date;
 
 	@Column({
-		type: DataType.STRING(255),
+		type: DataType.DATEONLY,
 		allowNull: false,
 	})
-	password!: string;
+	date!: Date;
 
 	@Column({
 		field: 'created_at',
@@ -71,4 +72,4 @@ class User extends Model<IUserAttributes> implements IUserAttributes {
 	@DeletedAt
 	deletedAt!: Date | null;
 }
-export default User;
+export default Sleep;
