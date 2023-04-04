@@ -6,7 +6,9 @@ import {
 	CreatedAt,
 	UpdatedAt,
 	DeletedAt,
+	HasMany,
 } from 'sequelize-typescript';
+import Sleep from './sleep.model';
 
 interface IUserAttributes {
 	id: string;
@@ -70,5 +72,8 @@ class User extends Model<IUserAttributes> implements IUserAttributes {
 	})
 	@DeletedAt
 	deletedAt!: Date | null;
+
+	@HasMany(() => Sleep)
+	sleep!: Sleep[];
 }
 export default User;

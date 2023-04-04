@@ -6,7 +6,10 @@ import {
 	CreatedAt,
 	UpdatedAt,
 	DeletedAt,
+	BelongsTo,
+	ForeignKey,
 } from 'sequelize-typescript';
+import User from './user.model';
 
 interface ISleepAttributes {
 	id: string;
@@ -71,5 +74,13 @@ class Sleep extends Model<ISleepAttributes> implements ISleepAttributes {
 	})
 	@DeletedAt
 	deletedAt!: Date | null;
+
+	@ForeignKey(() => User)
+	@Column
+	userId!: number;
+
+	@BelongsTo(() => User)
+	user!: User;
 }
+
 export default Sleep;
