@@ -1,12 +1,12 @@
 import { config } from 'dotenv';
-import { app } from './app';
+import app from './app';
 import connection from './config/database';
 
 config();
 const PORT: Number = Number(process.env.PORT);
 
 connection
-	.sync()
+	.sync({ force: false })
 	.then(() => {
 		console.log('Database successfully connected');
 	})

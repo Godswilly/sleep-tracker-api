@@ -76,8 +76,11 @@ class Sleep extends Model<ISleepAttributes> implements ISleepAttributes {
 	deletedAt!: Date | null;
 
 	@ForeignKey(() => User)
-	@Column
-	userId!: number;
+	@Column({
+		type: DataType.UUID,
+		defaultValue: DataType.UUIDV4,
+	})
+	userId!: string;
 
 	@BelongsTo(() => User)
 	user!: User;
