@@ -1,6 +1,7 @@
 import { config } from 'dotenv';
 import app from './app';
 import connection from './config/database';
+import logger from "./utils/logger";
 
 config();
 const PORT: Number = Number(process.env.PORT);
@@ -8,12 +9,12 @@ const PORT: Number = Number(process.env.PORT);
 connection
 	.sync({ force: false })
 	.then(() => {
-		console.log('Database successfully connected');
+		logger.info('Database successfully connected');
 	})
 	.catch((err) => {
-		console.log('Error', err);
+		logger.error('Error', err);
 	});
 
 app.listen(PORT, (): void => {
-	console.log(`Connected successfully on port ${PORT}`);
+	logger.info(`Connected successfully on port ${PORT}`);
 });

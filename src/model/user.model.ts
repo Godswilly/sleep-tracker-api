@@ -73,7 +73,7 @@ class User extends Model<IUserAttributes> implements IUserAttributes {
 	@DeletedAt
 	deletedAt!: Date | null;
 
-	@HasMany(() => Sleep)
-	sleep!: Sleep[];
+	// @HasMany(() => Sleep)
+	// sleep!: Sleep[];
 }
 export default User;

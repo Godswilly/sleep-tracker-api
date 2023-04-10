@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
 	Table,
 	Column,
@@ -75,15 +76,15 @@ class Sleep extends Model<ISleepAttributes> implements ISleepAttributes {
 	@DeletedAt
 	deletedAt!: Date | null;
 
-	@ForeignKey(() => User)
-	@Column({
-		type: DataType.UUID,
-		defaultValue: DataType.UUIDV4,
-	})
-	userId!: string;
+	// @ForeignKey(() => User)
+	// @Column({
+	// 	type: DataType.UUID,
+	// 	defaultValue: DataType.UUIDV4,
+	// })
+	// userId!: string;
 
-	@BelongsTo(() => User)
-	user!: User;
+	// @BelongsTo(() => User)
+	// user!: User;
 }
 
 export default Sleep;
